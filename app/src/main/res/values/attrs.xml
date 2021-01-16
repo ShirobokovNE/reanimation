@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SwipeCard">
+        <attr name="swipe_card_title" format="string"/>
+        <attr name="swipe_card_background" format="reference"/>
+    </declare-styleable>
+</resources>

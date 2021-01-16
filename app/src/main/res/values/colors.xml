@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@android:color/white</color>
+    <color name="colorPrimaryDark">#90A4AE</color>
+    <color name="colorAccent">#A9A9A9</color>
+
+    <color name="background_color">#35404b</color>
+    <color name="footer_color">#4e5e6e</color>
+
+    <color name="yellow">#fff701</color>
+    <color name="orange">#ff9600</color>
+    <color name="red">#fe0000</color>
+    <color name="green">#01ff2b</color>
+    <color name="black">@android:color/black</color>
+    <color name="white">@android:color/white</color>
+
+    <color name="swipe_background">#90000000</color>
+    <color name="fab_background">#7a8189</color>
+</resources>

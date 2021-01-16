@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/adultPatientCard"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_card_yellow">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/choose_age_adult_title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_30"
+            android:textStyle="bold"
+            tools:ignore="SpUsage" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/childPatientCard"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_card_orange">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/choose_age_child_title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_30"
+            android:textStyle="bold"
+            tools:ignore="SpUsage" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/newbornPatientCard"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_card_red"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/choose_age_newborn_title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_30"
+            android:textStyle="bold"
+            tools:ignore="SpUsage" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/choose_age_newborn_subtitle"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_25"
+            android:textStyle="bold"
+            tools:ignore="SpUsage" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/footer_color"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/historyCard"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_history"
+                android:gravity="center"
+                android:text="@string/choose_age_history_title"
+                tools:ignore="SpUsage" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/infoCard"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_info"
+                android:gravity="center"
+                android:text="@string/choose_age_about_title" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

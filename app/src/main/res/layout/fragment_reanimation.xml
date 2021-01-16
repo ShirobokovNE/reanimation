@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/zmsCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_card_yellow">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/zmsCardText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reanimation_zms_text"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/zmsCardTimer"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpUsage" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/soundIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:layout_constraintEnd_toEndOf="@+id/zmsCardTimer"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_colorFilter="@color/black"
+                app:lottie_rawRes="@raw/sound_animation" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/zmsCardTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_30"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/zmsCardText"
+                tools:ignore="SpUsage"
+                tools:text="00:00" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/adrenalinCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_card_green"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingHorizontal="8dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reanimation_adrenalin_title"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20"
+                android:textStyle="bold"
+                tools:ignore="SpUsage" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/adrenalinCardTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_30"
+                android:textStyle="bold"
+                tools:ignore="SpUsage"
+                tools:text="00:00" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/defibrillationCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_card_green"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingHorizontal="8dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reanimation_defibrillation_title"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20"
+                android:textStyle="bold"
+                tools:ignore="SpUsage" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/defibrillationCardTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_30"
+                android:textStyle="bold"
+                tools:ignore="SpUsage"
+                tools:text="00:00" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:overScrollMode="ifContentScrolls">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/additionalDataCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:background="@drawable/bg_card_orange"
+                android:paddingHorizontal="8dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/additionalDataCardTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_25"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="SpUsage"
+                    tools:text="@string/reanimation_death_cause_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/additionalDataCard1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_card_red"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/additionalDataCard2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/additionalDataCardTitle"
+                    tools:ignore="SpUsage"
+                    tools:text="@string/reanimation_additional_manipulation_card1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/additionalDataCard2"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/bg_card_red"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/additionalDataCard1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/additionalDataCard1"
+                    app:layout_constraintTop_toTopOf="@+id/additionalDataCard1"
+                    tools:ignore="SpUsage"
+                    tools:text="@string/reanimation_additional_manipulation_card2" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ru.shirobokov.reanimation.view.SwipeCard
+                android:id="@+id/adrenalinInjectCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="8dp"
+                app:swipe_card_background="@drawable/bg_card_red"
+                app:swipe_card_title="@string/reanimation_adrenalin_inject_title" />
+
+            <ru.shirobokov.reanimation.view.SwipeCard
+                android:id="@+id/doDefibrillationCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="8dp"
+                app:swipe_card_background="@drawable/bg_card_green" />
+
+            <ru.shirobokov.reanimation.view.SwipeCard
+                android:id="@+id/doIntubationCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="8dp"
+                app:swipe_card_background="@drawable/bg_card_orange"
+                app:swipe_card_title="@string/reanimation_do_intubation_card_title" />
+
+            <Space
+                android:id="@+id/space"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:minHeight="56dp" />
+
+            <ru.shirobokov.reanimation.view.SwipeCard
+                android:id="@+id/finishReanimationCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginBottom="24dp"
+                app:swipe_card_background="@drawable/bg_card_red"
+                app:swipe_card_title="@string/reanimation_finish_title"
+                tools:ignore="SpUsage" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
