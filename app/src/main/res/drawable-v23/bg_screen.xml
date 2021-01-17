@@ -4,6 +4,6 @@
         <color android:color="@color/background_color" />
     </item>
     <item
-        android:top="300dp"
-        android:drawable="@drawable/ic_background" />
+        android:drawable="@drawable/ic_background"
+        android:gravity="bottom|center_horizontal" />
 </layer-list>

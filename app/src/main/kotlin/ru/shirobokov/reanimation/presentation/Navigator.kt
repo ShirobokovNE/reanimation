@@ -48,36 +48,40 @@ class Navigator : Navigable {
     @ExperimentalCoroutinesApi
     @ObsoleteCoroutinesApi
     override fun navigateBack() {
-        val behavior = backBehaviorList.last().first
-        when {
-            behavior is NavigateBackBehavior.TwoClickBack -> {
-                if (exitReanimationFragmentPressed + EXIT_TIME_INTERVAL > System.currentTimeMillis()) {
-                    exitReanimationFragmentPressed = 0L
+        if (backBehaviorList.isEmpty()) {
+            activity.finish()
+        } else {
+            val behavior = backBehaviorList.last().first
+            when {
+                behavior is NavigateBackBehavior.TwoClickBack -> {
+                    if (exitReanimationFragmentPressed + EXIT_TIME_INTERVAL > System.currentTimeMillis()) {
+                        exitReanimationFragmentPressed = 0L
+                        activity.supportFragmentManager.popBackStack()
+                        backBehaviorList.removeLast()
+                    } else {
+                        exitReanimationFragmentPressed = System.currentTimeMillis()
+                        Toast.makeText(activity, R.string.exit_reanimation_screen_text, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                behavior is NavigateBackBehavior.BackToSaveTransaction -> {
+                    backBehaviorList.findLast { it.first is NavigateBackBehavior.SaveTransaction }?.let {
+                        backBehaviorList.subList(backBehaviorList.indexOf(it) + 1, backBehaviorList.size).clear()
+                    }
+                    backBehaviorList.last().second?.let { activity.supportFragmentManager.popBackStack(it, 0) }
+                }
+
+                behavior is NavigateBackBehavior.Back -> {
                     activity.supportFragmentManager.popBackStack()
                     backBehaviorList.removeLast()
-                } else {
-                    exitReanimationFragmentPressed = System.currentTimeMillis()
-                    Toast.makeText(activity, R.string.exit_reanimation_screen_text, Toast.LENGTH_SHORT).show()
                 }
-            }
 
-            behavior is NavigateBackBehavior.BackToSaveTransaction -> {
-                backBehaviorList.findLast { it.first is NavigateBackBehavior.SaveTransaction }?.let {
-                    backBehaviorList.subList(backBehaviorList.indexOf(it) + 1, backBehaviorList.size).clear()
+                behavior is NavigateBackBehavior.SaveTransaction && activity.supportFragmentManager.backStackEntryCount > 1 -> {
+                    activity.supportFragmentManager.popBackStack()
+                    backBehaviorList.removeLast()
                 }
-                backBehaviorList.last().second?.let { activity.supportFragmentManager.popBackStack(it, 0) }
+                else -> activity.finish()
             }
-
-            behavior is NavigateBackBehavior.Back -> {
-                activity.supportFragmentManager.popBackStack()
-                backBehaviorList.removeLast()
-            }
-
-            behavior is NavigateBackBehavior.SaveTransaction && activity.supportFragmentManager.backStackEntryCount > 1 -> {
-                activity.supportFragmentManager.popBackStack()
-                backBehaviorList.removeLast()
-            }
-            else -> activity.finish()
         }
     }
 

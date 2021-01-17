@@ -2,6 +2,7 @@ package ru.shirobokov.reanimation.presentation.history
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
@@ -13,11 +14,11 @@ import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.shirobokov.reanimation.R
 import ru.shirobokov.reanimation.databinding.FragmentReanimationHistoryBinding
+import ru.shirobokov.reanimation.presentation.Navigable
 import ru.shirobokov.reanimation.presentation.helplist.HelpListFragment
 import ru.shirobokov.reanimation.presentation.history.adpter.DiffUtilCallback
 import ru.shirobokov.reanimation.presentation.history.adpter.HistoryAdapter
 import ru.shirobokov.reanimation.presentation.history.adpter.HistoryHolder
-import ru.shirobokov.reanimation.presentation.Navigable
 
 @ExperimentalCoroutinesApi
 class HistoryFragment : Fragment(R.layout.fragment_reanimation_history) {
@@ -32,11 +33,14 @@ class HistoryFragment : Fragment(R.layout.fragment_reanimation_history) {
         binding.historyList.adapter = adapter
         binding.historyList.addItemDecoration(DividerItemDecoration(requireContext(), VERTICAL))
         lifecycleScope.launchWhenCreated {
-            viewModel.history.collect {
-                diffUtil.oldList = adapter.data
-                diffUtil.newList = it
-                DiffUtil.calculateDiff(diffUtil).dispatchUpdatesTo(adapter)
-                adapter.data = it
+            viewModel.history.collect { newList ->
+                if (newList != null) {
+                    binding.emptyHistoryText.isVisible = newList.isEmpty()
+                    diffUtil.oldList = adapter.data
+                    diffUtil.newList = newList
+                    DiffUtil.calculateDiff(diffUtil).dispatchUpdatesTo(adapter)
+                    adapter.data = newList
+                }
             }
         }
     }

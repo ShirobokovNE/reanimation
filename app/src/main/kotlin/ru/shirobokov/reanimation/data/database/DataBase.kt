@@ -1,4 +1,4 @@
-package ru.shirobokov.reanimation.data
+package ru.shirobokov.reanimation.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

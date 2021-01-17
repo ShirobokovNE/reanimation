@@ -1,6 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:overScrollMode="ifContentScrolls"
+    android:scrollbars="none"
+    app:layout_constraintTop_toTopOf="parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:srcCompat="@drawable/ic_background" />
+
+            <TextView
+                android:id="@+id/version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="130dp"
+                android:textColor="@color/footer_color"
+                android:textSize="@dimen/text_size_15"
+                tools:ignore="SpUsage"
+                tools:text="Версия: 1.0" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_15"
+            tools:ignore="SpUsage"
+            tools:text="@string/about_text" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/newButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="?attr/selectableItemBackground"
+            android:drawablePadding="8dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp"
+            android:text="@string/new_and_interest_text"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_17"
+            app:drawableEndCompat="@drawable/ic_shevron_right"
+            tools:ignore="SpUsage" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@color/footer_color" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/estimateButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:drawablePadding="8dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp"
+            android:text="@string/estimate_text"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_17"
+            app:drawableEndCompat="@drawable/ic_shevron_right"
+            tools:ignore="SpUsage" />
+
+        <View
+            android:id="@+id/donateDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@color/footer_color"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/donateButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:drawablePadding="8dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp"
+            android:text="@string/donate_text"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_17"
+            android:visibility="gone"
+            app:drawableEndCompat="@drawable/ic_shevron_right"
+            tools:ignore="SpUsage"
+            tools:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/warning_text"
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size_15"
+            tools:ignore="SpUsage" />
+
+    </LinearLayout>
+</ScrollView>

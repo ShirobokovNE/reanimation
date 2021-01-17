@@ -11,7 +11,7 @@ import ru.shirobokov.reanimation.domain.entity.presentation.ReanimationHelpPrese
 @ExperimentalCoroutinesApi
 class HistoryViewModel(private val interactor: ReanimationInteractor) : ViewModel() {
 
-    val history = MutableStateFlow(emptyList<ReanimationHelpPresentation>())
+    val history = MutableStateFlow<List<ReanimationHelpPresentation>?>(null)
 
     init {
         viewModelScope.launch { history.value = interactor.getReanimationHistory() }

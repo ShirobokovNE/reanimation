@@ -2,14 +2,15 @@
     <string name="app_name">CЛР</string>
 
     <string name="exit_reanimation_screen_text">Нажмите еще раз чтоб выйти</string>
-
+    <!-- MainFragment -->
     <string name="choose_age_adult_title">Взрослый</string>
     <string name="choose_age_child_title">Ребенок до 8 лет</string>
     <string name="choose_age_newborn_title">Новорожденный</string>
     <string name="choose_age_newborn_subtitle">(первые 10 минут жизни)</string>
-    <string name="choose_age_history_title">История</string>
-    <string name="choose_age_about_title">О приложении</string>
+    <string name="history_button_text">История</string>
+    <string name="about_button_text">О приложении</string>
 
+    <!--  ReanimationFragment  -->
     <string name="reanimation_zms_text">ЗМС</string>
     <string name="reanimation_ivl_text">ИВЛ</string>
     <string name="reanimation_lukas_text">Lukas</string>
@@ -37,6 +38,7 @@
     <string name="reanimation_do_intubation_card_title">Выполнена герметизация дыхательных
         путей</string>
 
+    <!--  HelpListFragment  -->
     <string name="reanimation_help_start_adult">%s - Первичный осмотр, состояние расценено как
         клиническая смерть, начат ЗМС 100 в минуту, ИВЛ мешком Амбу через тугую лицевую маску с
         подключением линии подачи кислорода 2/30 с ЗМС; мониторинг.</string>
@@ -67,9 +69,25 @@
         в 3 точках. Манжета раздута. Фиксация. Аускультативный контроль положения трубки в пяти
         точках. Санация трахей аспиратором. ИВЛ продолжена через ЭТТ с частотой 10 в минуту. ЗМС
         продолжен непрерывно 100-120 в минуту.</string>
-
     <string name="reanimation_finish_copy">Скопировано</string>
 
+    <!--  HistoryFragment  -->
     <string name="reanimation_history_delete">Удалить</string>
+    <string name="reanimation_history_empty_text">История пуста</string>
+
+    <!--  AboutFragment -->
+    <string name="warning_text">Перед применением приложения в боевых условиях настоятельно
+        рекомендуется протестировать приложение на конкретном устройстве</string>
+    <string name="about_text">Приложение для помощи медицинским работникам в
+        оказании сердечно-легочной реанимации с звуковыми подсказками.
+        &lt;a href="https://www.youtube.com/c/ПроСМП/featured"&gt;\n\nРуководство по использованию
+        в видеоформате&lt;/a&gt;</string>
+    <string name="version_text">Версия: %s</string>
+    <string name="new_and_interest_text">Новое и интересное</string>
+    <string name="estimate_text">Оценить приложение</string>
+    <string name="donate_text">На вкусняшки создателю</string>
+    <string name="thanks_text">Спасибо!</string>
+
+    <string name="ok_text">OK</string>
 
 </resources>

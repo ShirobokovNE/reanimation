@@ -3,7 +3,7 @@ package ru.shirobokov.reanimation.domain.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import ru.shirobokov.reanimation.data.DataBaseListConverter
+import ru.shirobokov.reanimation.data.database.DataBaseListConverter
 
 @Entity
 @TypeConverters(DataBaseListConverter::class)

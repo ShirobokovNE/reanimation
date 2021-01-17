@@ -11,6 +11,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import ru.shirobokov.reanimation.domain.ServicesDataInteractor
 import ru.shirobokov.reanimation.presentation.reanimation.model.ReanimationModel.Companion.BREATH_AUDIO_FILE
 import ru.shirobokov.reanimation.presentation.reanimation.model.ReanimationModel.Companion.CHOOSE_AGE_AUDIO_FILE
 import ru.shirobokov.reanimation.presentation.reanimation.model.ReanimationModel.Companion.DO_DEFIBRILLATION_IF_NEED_AUDIO_FILE
@@ -20,7 +21,9 @@ import ru.shirobokov.reanimation.presentation.reanimation.model.ReanimationModel
 
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
-class HostViewModel : ViewModel() {
+class HostViewModel(
+    private val servicesDataInteractor: ServicesDataInteractor
+) : ViewModel() {
 
     private var metronomeJob: Job? = null
     private val metronomeDelayTime = (MILLISECOND_IN_MINUTE / METRONOME_RATE).toLong()
@@ -41,6 +44,12 @@ class HostViewModel : ViewModel() {
                 MetronomeType.ZMS_NEWBORN -> startNewbornMetronome()
                 MetronomeType.IVL -> startIvlMetronome()
             }
+        }
+
+    var isWarningAgree
+        get() = servicesDataInteractor.isWarningAgree
+        set(value) {
+            servicesDataInteractor.isWarningAgree = value
         }
 
     init {

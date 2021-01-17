@@ -5,6 +5,7 @@ import android.media.ToneGenerator.TONE_CDMA_CALLDROP_LITE
 import android.media.ToneGenerator.TONE_PROP_ACK
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.firebase.crashlytics.FirebaseCrashlytics
@@ -29,6 +30,25 @@ class HostActivity : AppCompatActivity(R.layout.activity_host), Navigable by Nav
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initNavigator(this, binding.fragmentContainer.id)
+
+        if (!viewModel.isWarningAgree) {
+            binding.warningLayout.isVisible = true
+            binding.agreeButton.setOnClickListener {
+                viewModel.isWarningAgree = true
+                binding.warningLayout.isVisible = false
+                startReanimation()
+            }
+        } else {
+            startReanimation()
+        }
+    }
+
+    fun onWarningAgree() {
+
+    }
+
+    private fun startReanimation() {
         try {
             if (toneGenerator == null) {
                 toneGenerator = ToneGenerator(AudioManager.STREAM_MUSIC, ToneGenerator.MAX_VOLUME)
@@ -37,7 +57,6 @@ class HostActivity : AppCompatActivity(R.layout.activity_host), Navigable by Nav
             FirebaseCrashlytics.getInstance().recordException(exception)
         }
 
-        initNavigator(this, binding.fragmentContainer.id)
         navigateTo(MainFragment.newInstance(), NavigateBackBehavior.SaveTransaction)
 
         lifecycleScope.launchWhenCreated {

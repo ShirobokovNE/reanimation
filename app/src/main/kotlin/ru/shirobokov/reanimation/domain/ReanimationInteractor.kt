@@ -1,6 +1,6 @@
 package ru.shirobokov.reanimation.domain
 
-import ru.shirobokov.reanimation.data.DataBase
+import ru.shirobokov.reanimation.data.database.DataBase
 import ru.shirobokov.reanimation.domain.entity.ReanimationHelp
 import ru.shirobokov.reanimation.domain.entity.presentation.ReanimationHelpPresentation
 import ru.shirobokov.reanimation.utils.ResourcesHandler

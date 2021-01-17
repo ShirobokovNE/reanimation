@@ -1,4 +1,4 @@
-package ru.shirobokov.reanimation.data
+package ru.shirobokov.reanimation.data.database
 
 import androidx.room.TypeConverter
 import java.util.regex.Pattern

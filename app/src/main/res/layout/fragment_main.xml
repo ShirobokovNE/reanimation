@@ -95,25 +95,25 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/historyCard"
+                android:id="@+id/historyButton"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="2dp"
                 android:layout_weight="1"
                 android:drawableTop="@drawable/ic_history"
                 android:gravity="center"
-                android:text="@string/choose_age_history_title"
+                android:text="@string/history_button_text"
                 tools:ignore="SpUsage" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/infoCard"
+                android:id="@+id/infoButton"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="2dp"
                 android:layout_weight="1"
                 android:drawableTop="@drawable/ic_info"
                 android:gravity="center"
-                android:text="@string/choose_age_about_title" />
+                android:text="@string/about_button_text" />
 
         </LinearLayout>
     </LinearLayout>

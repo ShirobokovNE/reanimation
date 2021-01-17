@@ -9,6 +9,7 @@ import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import ru.shirobokov.reanimation.R
 import ru.shirobokov.reanimation.databinding.FragmentMainBinding
+import ru.shirobokov.reanimation.presentation.abot.AboutFragment
 import ru.shirobokov.reanimation.presentation.history.HistoryFragment
 import ru.shirobokov.reanimation.presentation.reanimation.ReanimationFragment
 
@@ -39,8 +40,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 NavigateBackBehavior.TwoClickBack
             )
         }
-        binding.historyCard.setOnClickListener {
+        binding.historyButton.setOnClickListener {
             (requireActivity() as Navigable).navigateTo(HistoryFragment.newInstance())
+            hostViewModel.stopMetronome()
+            hostViewModel.audioQueue.clear()
+        }
+        binding.infoButton.setOnClickListener {
+            (requireActivity() as Navigable).navigateTo(AboutFragment.newInstance())
             hostViewModel.stopMetronome()
             hostViewModel.audioQueue.clear()
         }

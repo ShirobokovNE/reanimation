@@ -4,6 +4,7 @@
         <color android:color="@color/background_color" />
     </item>
     <item
-        android:top="300dp"
+        android:top="400dp"
+        android:bottom="100dp"
         android:drawable="@drawable/ic_background" />
 </layer-list>
