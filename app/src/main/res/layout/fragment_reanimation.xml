@@ -33,6 +33,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_20"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/soundIcon"
                 app:layout_constraintStart_toStartOf="@+id/zmsCardTimer"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpUsage" />
