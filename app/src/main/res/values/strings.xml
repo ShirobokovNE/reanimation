@@ -34,7 +34,7 @@
     <string name="reanimation_do_defibrillation_count">Выполнено: %d</string>
     <string name="reanimation_finish_title">Завершить реанимацию</string>
     <string name="reanimation_do_defibrillation_360">150–360 Дж</string>
-    <string name="reanimation_do_defibrillation_4">4 ДЖ/кг</string>
+    <string name="reanimation_do_defibrillation_4">4 Дж/кг</string>
     <string name="reanimation_do_intubation_card_title">Выполнена герметизация дыхательных
         путей</string>
 
@@ -45,8 +45,10 @@
     <string name="reanimation_help_start_child">%s - Первичный осмотр, состояние расценено как
         клиническая смерть, начат ЗМС 100 в минуту, ИВЛ мешком Амбу через тугую лицевую маску с
         подключением линии подачи кислорода 2/15 с ЗМС; мониторинг.</string>
-    <string name="reanimation_help_evaluate_rhythm">%s. Оценка ритма сердца и дыхания.</string>
-    <string name="reanimation_help_five_breath">%s. Выполнено 5 вдохов воздухом, оценка ритма.</string>
+    <string name="reanimation_help_evaluate_rhythm">%s. Оценка ритма сердца и дыхания.
+        Состояние расценено как клиническая смерть.</string>
+    <string name="reanimation_help_five_breath">%s. Выполнено 5 вдохов воздухом, оценка ритма сердца
+        и дыхания. Состояние расценено как клиническая смерть.</string>
     <string name="reanimation_help_inject_adrenalin_adult">%s - Sol. Adrenalini 0.1 mg/ml - 1 ml в
         разведении Sol. Natrii Chloridi 0.9%% до 20 ml внутривенно быстро.</string>
     <string name="reanimation_help_inject_adrenalin_child">%s - Sol. Adrenalini 10 мкг/кг в
@@ -55,19 +57,21 @@
         зафиксирована фибрилляция желудочков, выполнена дефибрилляция, продолжен ЗМС и ИВЛ в
         прежнем режиме.</string>
     <string name="reanimation_help_do_defibrillation_child">%s. На экране монитора зафиксирована
-        фибрилляция, выполнена дифибрилляция 4 Дж/кг, продолжен ЗМС и ИВЛ в прежнем режиме.</string>
+        фибрилляция желудочков, выполнена дифибрилляция 4 Дж/кг, продолжен ЗМС и ИВЛ в прежнем режиме.
+    </string>
     <string name="reanimation_help_inject_300_amiodarone_adult">%s - Sol. Amiodaroni 300 mg
         внутривенно быстро.</string>
     <string name="reanimation_help_inject_150_amiodarone_adult">%s - Sol. Amiodaroni 150 mg
         внутривенно быстро.</string>
     <string name="reanimation_help_inject_amiodarone_child">%s - Sol. Amiodaroni 5 мг/кг
-        болюсно.</string>
+        внутривенно болюсно.</string>
     <string name="reanimation_help_do_intubation">%s. Под контролем прямой ларингоскопии
         ларингоскопом с клинком McIntosh| Miller № выполнена оротрахеальная интубация трубкой № .
         Конец трубки под визуальным контролем с первой попытки без технических сложностей заведен за
         голосовую щель. Глубина постановки - см от резцов. Аускультативный контроль положения трубки
-        в 3 точках. Манжета раздута. Фиксация. Аускультативный контроль положения трубки в пяти
-        точках. Санация трахей аспиратором. ИВЛ продолжена через ЭТТ с частотой 10 в минуту. ЗМС
+        в трёх точках - шумы ИВЛ проводятся симметрично с двух сторон. Манжета раздута. Фиксация ЭТТ.
+        Аускультативный контроль положения трубки в пяти точках - шумы ИВЛ проводятся симметрично с
+        двух сторон Санация трахеи аспиратором. ИВЛ продолжена через ЭТТ с частотой 10 в минуту. ЗМС
         продолжен непрерывно 100-120 в минуту.</string>
     <string name="reanimation_finish_copy">Скопировано</string>
 
@@ -76,12 +80,11 @@
     <string name="reanimation_history_empty_text">История пуста</string>
 
     <!--  AboutFragment -->
-    <string name="warning_text">Перед применением приложения в боевых условиях настоятельно
-        рекомендуется протестировать приложение на конкретном устройстве</string>
+    <string name="warning_text">Рекомендуем вам протестировать программу на вашем устройстве до
+        того, как она понадобится в реальной клинической ситуации.</string>
     <string name="about_text">Приложение для помощи медицинским работникам в
-        оказании сердечно-легочной реанимации с звуковыми подсказками.
-        &lt;a href="https://www.youtube.com/c/ПроСМП/featured"&gt;\n\nРуководство по использованию
-        в видеоформате&lt;/a&gt;</string>
+        оказании сердечно-легочной реанимации с звуковыми подсказками.</string>
+    <string name="video_instruction_text">Видеоинструкция</string>
     <string name="version_text">Версия: %s</string>
     <string name="new_and_interest_text">Новое и интересное</string>
     <string name="estimate_text">Оценить приложение</string>
