@@ -14,7 +14,6 @@ class RemoteConfig() {
         .build()
 
     fun fetch() {
-        firebaseRemoteConfig.reset()
         firebaseRemoteConfig.setConfigSettingsAsync(configSettings)
         firebaseRemoteConfig.setDefaultsAsync(defaults)
         firebaseRemoteConfig.fetchAndActivate()
