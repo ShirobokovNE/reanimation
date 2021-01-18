@@ -16,7 +16,7 @@ android {
         applicationId "ru.shirobokov.reanimation"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 3
+        versionCode 5
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -99,6 +99,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:26.3.0')
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-config'
 
     implementation 'com.android.billingclient:billing:3.0.2'
 

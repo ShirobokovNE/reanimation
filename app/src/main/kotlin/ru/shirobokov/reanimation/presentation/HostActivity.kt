@@ -44,10 +44,6 @@ class HostActivity : AppCompatActivity(R.layout.activity_host), Navigable by Nav
         }
     }
 
-    fun onWarningAgree() {
-
-    }
-
     private fun startReanimation() {
         try {
             if (toneGenerator == null) {

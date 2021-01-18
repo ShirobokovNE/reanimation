@@ -54,6 +54,7 @@ class HostViewModel(
 
     init {
         initAudioQueue()
+        servicesDataInteractor.fetchRemoteConfig()
     }
 
     private fun initAudioQueue() {

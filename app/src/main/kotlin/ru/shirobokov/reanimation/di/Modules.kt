@@ -6,12 +6,14 @@ import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
+import ru.shirobokov.reanimation.data.RemoteConfig
 import ru.shirobokov.reanimation.data.SharedPreferencesRepository
 import ru.shirobokov.reanimation.data.database.DataBase
 import ru.shirobokov.reanimation.domain.ReanimationInteractor
 import ru.shirobokov.reanimation.domain.ServicesDataInteractor
 import ru.shirobokov.reanimation.presentation.HostViewModel
 import ru.shirobokov.reanimation.presentation.MetronomeType
+import ru.shirobokov.reanimation.presentation.abot.AboutViewModel
 import ru.shirobokov.reanimation.presentation.helplist.HelpListViewModel
 import ru.shirobokov.reanimation.presentation.history.HistoryViewModel
 import ru.shirobokov.reanimation.presentation.reanimation.ReanimationViewModel
@@ -27,9 +29,10 @@ import ru.shirobokov.reanimation.utils.ResourcesHandlerImpl
 val diModules = module {
     single { Room.databaseBuilder(get(), DataBase::class.java, "database").build() }
     single { SharedPreferencesRepository(get()) }
+    single { RemoteConfig() }
 
     single { ReanimationInteractor(get(), get()) }
-    single { ServicesDataInteractor(get()) }
+    single { ServicesDataInteractor(get(), get()) }
 
     single { ResourcesHandlerImpl(get()) } bind ResourcesHandler::class
 
@@ -47,4 +50,5 @@ val diModules = module {
     }
     viewModel { HelpListViewModel(get()) }
     viewModel { HistoryViewModel(get()) }
+    viewModel { AboutViewModel(get()) }
 }

@@ -16,13 +16,15 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.shirobokov.reanimation.R
 import ru.shirobokov.reanimation.databinding.FragmentAboutBinding
-import ru.shirobokov.reanimation.utils.setTextAsHtml
 
 class AboutFragment : Fragment(R.layout.fragment_about) {
 
     private val binding: FragmentAboutBinding by viewBinding()
+    private val viewModel: AboutViewModel by viewModel()
+
     private var connectCount = 0
     private val skuDetailsMap = hashMapOf<String, SkuDetails>()
     private val billingClient by lazy {
@@ -41,13 +43,14 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
 
         connectBilling()
 
-        binding.description.setTextAsHtml(getString(R.string.about_text))
+        binding.videoInstructionButton.isVisible = viewModel.videoInstructionUrl.isNotBlank()
+        binding.videoInstructionDivider.isVisible = viewModel.videoInstructionUrl.isNotBlank()
+        binding.videoInstructionButton.setOnClickListener {
+            requireContext().startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(viewModel.videoInstructionUrl)))
+        }
         val versionText = getString(
             R.string.version_text,
-            requireContext().packageManager.getPackageInfo(
-                requireContext().packageName,
-                0
-            ).versionName
+            requireContext().packageManager.getPackageInfo(requireContext().packageName, 0).versionName
         )
         binding.version.text = versionText
         binding.newButton.setOnClickListener {
@@ -82,14 +85,14 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
                         withContext(Dispatchers.IO) {
                             billingClient.querySkuDetailsAsync(skuDetails) { billingResult, skuDetailsList ->
                                 if (billingResult.responseCode == OK) {
-                                    skuDetailsList?.let {
-                                        launch {
+                                    launch {
+                                        skuDetailsList?.let {
                                             withContext(Dispatchers.Main) {
                                                 binding.donateButton.isVisible = skuDetailsList.isNotEmpty()
                                                 binding.donateDivider.isVisible = skuDetailsList.isNotEmpty()
+                                                for (details in skuDetailsList) skuDetailsMap[details.sku] = details
                                             }
                                         }
-                                        for (details in skuDetailsList) skuDetailsMap[details.sku] = details
                                     }
                                 }
                             }
