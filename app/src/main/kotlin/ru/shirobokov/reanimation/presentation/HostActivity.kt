@@ -4,10 +4,12 @@ import android.media.*
 import android.media.ToneGenerator.TONE_CDMA_CALLDROP_LITE
 import android.media.ToneGenerator.TONE_PROP_ACK
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.android.billingclient.api.*
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.ObsoleteCoroutinesApi
@@ -27,9 +29,22 @@ class HostActivity : AppCompatActivity(R.layout.activity_host), Navigable by Nav
     private var toneGenerator: ToneGenerator? = null
     private val audioPlayer = MediaPlayer()
 
+    private var connectCount = 0
+    val skuDetailsMap = hashMapOf<String, SkuDetails>()
+    val billingClient by lazy {
+        BillingClient.newBuilder(this)
+            .setListener { billingResult, purchases ->
+                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
+                    Toast.makeText(this, R.string.thanks_text, Toast.LENGTH_SHORT).show()
+                }
+            }
+            .enablePendingPurchases()
+            .build()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        connectBilling()
         initNavigator(this, binding.fragmentContainer.id)
 
         if (!viewModel.isWarningAgree) {
@@ -111,7 +126,42 @@ class HostActivity : AppCompatActivity(R.layout.activity_host), Navigable by Nav
         audioPlayer.start()
     }
 
+    private fun connectBilling() {
+        billingClient.startConnection(object : BillingClientStateListener {
+            override fun onBillingSetupFinished(billingResult: BillingResult) {
+                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                    lifecycleScope.launchWhenCreated {
+                        val skuDetails = SkuDetailsParams.newBuilder()
+                            .setSkusList(mutableListOf(DONATE_ID))
+                            .setType(BillingClient.SkuType.INAPP)
+                            .build()
+                        billingClient.querySkuDetailsAsync(skuDetails) { billingResult, skuDetailsList ->
+                            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                                skuDetailsList?.let {
+                                    skuDetailsList.forEach { skuDetailsMap[it.sku] = it }
+                                    billingClient.queryPurchases(BillingClient.SkuType.INAPP).purchasesList?.forEach {
+                                        skuDetailsMap.remove(it.sku)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Suppress("ThrowableNotThrown")
+            override fun onBillingServiceDisconnected() {
+                connectCount++
+                val error = RuntimeException("Нет соединения с биллингом. Повторное соединение, попытка: $connectCount")
+                FirebaseCrashlytics.getInstance().recordException(error)
+                if (connectCount < 3) connectBilling()
+            }
+        })
+    }
+
     companion object {
         private const val TONE_GENERATOR_DURATION = 100
+
+        const val DONATE_ID = "donate"
     }
 }

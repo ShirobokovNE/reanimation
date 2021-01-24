@@ -5,45 +5,29 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.android.billingclient.api.BillingClient
-import com.android.billingclient.api.BillingClient.BillingResponseCode.OK
-import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingFlowParams
-import com.android.billingclient.api.BillingResult
-import com.android.billingclient.api.SkuDetails
-import com.android.billingclient.api.SkuDetailsParams
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.shirobokov.reanimation.R
 import ru.shirobokov.reanimation.databinding.FragmentAboutBinding
+import ru.shirobokov.reanimation.presentation.HostActivity
+import ru.shirobokov.reanimation.presentation.HostActivity.Companion.DONATE_ID
 
+@ExperimentalCoroutinesApi
+@ObsoleteCoroutinesApi
 class AboutFragment : Fragment(R.layout.fragment_about) {
 
     private val binding: FragmentAboutBinding by viewBinding()
     private val viewModel: AboutViewModel by viewModel()
 
-    private var connectCount = 0
-    private val skuDetailsMap = hashMapOf<String, SkuDetails>()
-    private val billingClient by lazy {
-        BillingClient.newBuilder(requireActivity())
-            .setListener { billingResult, purchases ->
-                if (billingResult.responseCode == OK && purchases != null) {
-                    context?.let { Toast.makeText(it, R.string.thanks_text, Toast.LENGTH_SHORT).show() }
-                }
-            }
-            .enablePendingPurchases()
-            .build()
-    }
+    private val activity by lazy { requireActivity() as HostActivity }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        connectBilling()
 
         binding.videoInstructionButton.isVisible = viewModel.videoInstructionUrl.isNotBlank()
         binding.videoInstructionDivider.isVisible = viewModel.videoInstructionUrl.isNotBlank()
@@ -65,56 +49,20 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(BROWSER_MARKET_URL)))
             }
         }
+        binding.donateDivider.isVisible = activity.skuDetailsMap.isNotEmpty()
+        binding.donateButton.isVisible = activity.skuDetailsMap.isNotEmpty()
         binding.donateButton.setOnClickListener {
-            skuDetailsMap[DONATE_ID]?.let { details ->
-                val billingFlowParams = BillingFlowParams.newBuilder()
-                    .setSkuDetails(details)
-                    .build()
-                billingClient.launchBillingFlow(requireActivity(), billingFlowParams)
+            activity.skuDetailsMap[DONATE_ID]?.let { details ->
+                val billingFlowParams = BillingFlowParams.newBuilder().setSkuDetails(details).build()
+                activity.billingClient.launchBillingFlow(requireActivity(), billingFlowParams)
             }
         }
-    }
-
-    private fun connectBilling() {
-        billingClient.startConnection(object : BillingClientStateListener {
-            override fun onBillingSetupFinished(billingResult: BillingResult) {
-                if (billingResult.responseCode == OK) {
-                    lifecycleScope.launchWhenCreated {
-                        val skuDetails = SkuDetailsParams.newBuilder()
-                            .setSkusList(mutableListOf(DONATE_ID))
-                            .setType(BillingClient.SkuType.INAPP)
-                            .build()
-                        billingClient.querySkuDetailsAsync(skuDetails) { billingResult, skuDetailsList ->
-                            if (billingResult.responseCode == OK) {
-                                skuDetailsList?.let {
-                                    for (details in skuDetailsList) skuDetailsMap[details.sku] = details
-                                    billingClient.queryPurchases(BillingClient.SkuType.INAPP).purchasesList?.forEach {
-                                        skuDetailsMap.remove(it.sku)
-                                    }
-                                    binding.donateButton.isVisible = skuDetailsMap.isNotEmpty()
-                                    binding.donateDivider.isVisible = skuDetailsMap.isNotEmpty()
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            @Suppress("ThrowableNotThrown")
-            override fun onBillingServiceDisconnected() {
-                connectCount++
-                val error = RuntimeException("Нет соединения с биллингом. Повторное соединение, попытка: $connectCount")
-                FirebaseCrashlytics.getInstance().recordException(error)
-                if (connectCount < 3) connectBilling()
-            }
-        })
     }
 
     companion object {
         private const val NEW_URL = "https://www.youtube.com/c/ПроСМП/featured"
         private const val MARKET_URL = "market://details?id=ru.shirobokov.reanimation"
         private const val BROWSER_MARKET_URL = "https://play.google.com/store/apps/details?id=ru.shirobokov.reanimation"
-        private const val DONATE_ID = "donate"
 
         fun newInstance() = AboutFragment()
     }
