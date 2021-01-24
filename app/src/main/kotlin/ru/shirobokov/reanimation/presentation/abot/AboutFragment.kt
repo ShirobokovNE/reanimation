@@ -10,12 +10,14 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.android.billingclient.api.*
+import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClient.BillingResponseCode.OK
+import com.android.billingclient.api.BillingClientStateListener
+import com.android.billingclient.api.BillingFlowParams
+import com.android.billingclient.api.BillingResult
+import com.android.billingclient.api.SkuDetails
+import com.android.billingclient.api.SkuDetailsParams
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.shirobokov.reanimation.R
 import ru.shirobokov.reanimation.databinding.FragmentAboutBinding
@@ -31,7 +33,7 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
         BillingClient.newBuilder(requireActivity())
             .setListener { billingResult, purchases ->
                 if (billingResult.responseCode == OK && purchases != null) {
-                    Toast.makeText(requireActivity(), R.string.thanks_text, Toast.LENGTH_SHORT).show()
+                    context?.let { Toast.makeText(it, R.string.thanks_text, Toast.LENGTH_SHORT).show() }
                 }
             }
             .enablePendingPurchases()
@@ -82,18 +84,15 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
                             .setSkusList(mutableListOf(DONATE_ID))
                             .setType(BillingClient.SkuType.INAPP)
                             .build()
-                        withContext(Dispatchers.IO) {
-                            billingClient.querySkuDetailsAsync(skuDetails) { billingResult, skuDetailsList ->
-                                if (billingResult.responseCode == OK) {
-                                    launch {
-                                        skuDetailsList?.let {
-                                            withContext(Dispatchers.Main) {
-                                                binding.donateButton.isVisible = skuDetailsList.isNotEmpty()
-                                                binding.donateDivider.isVisible = skuDetailsList.isNotEmpty()
-                                                for (details in skuDetailsList) skuDetailsMap[details.sku] = details
-                                            }
-                                        }
+                        billingClient.querySkuDetailsAsync(skuDetails) { billingResult, skuDetailsList ->
+                            if (billingResult.responseCode == OK) {
+                                skuDetailsList?.let {
+                                    for (details in skuDetailsList) skuDetailsMap[details.sku] = details
+                                    billingClient.queryPurchases(BillingClient.SkuType.INAPP).purchasesList?.forEach {
+                                        skuDetailsMap.remove(it.sku)
                                     }
+                                    binding.donateButton.isVisible = skuDetailsMap.isNotEmpty()
+                                    binding.donateDivider.isVisible = skuDetailsMap.isNotEmpty()
                                 }
                             }
                         }

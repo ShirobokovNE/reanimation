@@ -3,7 +3,7 @@ package ru.shirobokov.reanimation.data
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 
-class RemoteConfig() {
+class RemoteConfig {
 
     private val defaults = hashMapOf<String, Any>(
         VIDEO_INSTRUCTION_URL_KEY to VIDEO_INSTRUCTION_URL_DEFAULT_VALUE
