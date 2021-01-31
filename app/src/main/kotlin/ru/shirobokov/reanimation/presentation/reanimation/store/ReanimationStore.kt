@@ -65,6 +65,7 @@ abstract class ReanimationStore(private val reanimationInteractor: ReanimationIn
     }
 
     private suspend fun reanimationFinishClick(reanimationModel: ReanimationModel): ReanimationModel {
+        helpList.add(R.string.reanimation_help_finish to System.currentTimeMillis())
         reanimationInteractor.saveReanimationHelp(startReanimationTime, System.currentTimeMillis(), helpList)
         return reanimationModel
     }

@@ -25,6 +25,9 @@ class NewbornPatientStore(interactor: ReanimationInteractor) : ReanimationStore(
             NewbornHelp.FIVE_BREATH -> {
                 helpList.add(R.string.reanimation_help_five_breath to System.currentTimeMillis())
             }
+            NewbornHelp.FIVE_BREATH_AND_START_ZMS -> {
+                helpList.add(R.string.reanimation_help_five_breath_and_start_zms to System.currentTimeMillis())
+            }
             else -> Unit
         }
         return reanimationModel

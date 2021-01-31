@@ -154,11 +154,19 @@ class HostViewModel(
                 audioPlayer.value = BREATH_AUDIO_FILE
                 delay(NEWBORN_BREATH_DELAY_TIME)
                 breathCount++
-                if (breathCount % 5 == 0) {
-                    audioPlayer.value = EVALUATION_RHYTHM_AUDIO_FILE
-                    newbornHelp.value = NewbornHelp.FIVE_BREATH
-                    newbornHelp.value = NewbornHelp.NONE
-                    delay(LONG_DELAY_TIME)
+                when (breathCount) {
+                    5 -> {
+                        audioPlayer.value = EVALUATION_RHYTHM_AUDIO_FILE
+                        newbornHelp.value = NewbornHelp.FIVE_BREATH
+                        newbornHelp.value = NewbornHelp.NONE
+                        delay(LONG_DELAY_TIME)
+                    }
+                    10 -> {
+                        audioPlayer.value = EVALUATION_RHYTHM_AUDIO_FILE
+                        newbornHelp.value = NewbornHelp.FIVE_BREATH_AND_START_ZMS
+                        newbornHelp.value = NewbornHelp.NONE
+                        delay(LONG_DELAY_TIME)
+                    }
                 }
             }
 
@@ -238,5 +246,5 @@ enum class AudioPlayerCompletion {
 }
 
 enum class NewbornHelp {
-    EVALUATE_RHYTHM, FIVE_BREATH, NONE
+    EVALUATE_RHYTHM, FIVE_BREATH, FIVE_BREATH_AND_START_ZMS, NONE
 }
