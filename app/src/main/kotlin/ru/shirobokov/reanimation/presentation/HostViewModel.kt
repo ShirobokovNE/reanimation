@@ -152,7 +152,7 @@ class HostViewModel(
             var breathCount = 0
             while (isActive && breathCount < 10) {
                 audioPlayer.value = BREATH_AUDIO_FILE
-                delay(metronomeDelayTime * 2)
+                delay(NEWBORN_BREATH_DELAY_TIME)
                 breathCount++
                 if (breathCount % 5 == 0) {
                     audioPlayer.value = EVALUATION_RHYTHM_AUDIO_FILE
@@ -219,6 +219,7 @@ class HostViewModel(
     companion object {
         private const val MIDDLE_DELAY_TIME = 5000L
         private const val LONG_DELAY_TIME = 8000L
+        private const val NEWBORN_BREATH_DELAY_TIME = 3000L
         private const val MILLISECOND_IN_MINUTE = 60000.0
         private const val METRONOME_RATE = 100
     }
