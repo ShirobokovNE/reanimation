@@ -12,7 +12,7 @@ class ReanimationInteractor(
     private val dataBase: DataBase
 ) : ResourcesHandler by resourcesHandler {
 
-    private val dateFormatter = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+    private val dateFormatter = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())
 
     val helpList: MutableList<String> = mutableListOf()
 
@@ -21,7 +21,9 @@ class ReanimationInteractor(
         endReanimation: Long,
         list: List<Pair<Int, Long>>
     ) {
-        val saveList = list.map { getString(it.first, dateFormatter.format(it.second)) }
+        val saveList = list
+            .sortedBy { it.second }
+            .map { getString(it.first, dateFormatter.format(it.second)) }
         helpList.clear()
         helpList.addAll(saveList)
         dataBase.getReanimationResultDataBase()

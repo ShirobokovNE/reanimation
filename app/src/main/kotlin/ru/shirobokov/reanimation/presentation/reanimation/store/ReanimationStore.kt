@@ -10,6 +10,7 @@ abstract class ReanimationStore(private val reanimationInteractor: ReanimationIn
     protected val startReanimationTime = System.currentTimeMillis()
     protected val helpList: MutableList<Pair<Int, Long>> = mutableListOf()
 
+    abstract val evaluateRhythmHelpRes: Int
     abstract val defibrillationHelpRes: Int
     abstract val adrenalinInjectHelpRes: Int
     abstract val amiodaroneFirstInjectHelpInt: Int
@@ -64,7 +65,7 @@ abstract class ReanimationStore(private val reanimationInteractor: ReanimationIn
         )
     }
 
-    private suspend fun reanimationFinishClick(reanimationModel: ReanimationModel): ReanimationModel {
+    protected open suspend fun reanimationFinishClick(reanimationModel: ReanimationModel): ReanimationModel {
         helpList.add(R.string.reanimation_help_finish to System.currentTimeMillis())
         reanimationInteractor.saveReanimationHelp(startReanimationTime, System.currentTimeMillis(), helpList)
         return reanimationModel

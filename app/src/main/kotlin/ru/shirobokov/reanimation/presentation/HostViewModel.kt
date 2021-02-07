@@ -116,6 +116,12 @@ class HostViewModel(
     private fun startChildMetronome() {
         stopMetronome()
         metronomeJob = viewModelScope.launch {
+            var breathCount = 0
+            while (isActive && breathCount < 5) {
+                audioPlayer.value = BREATH_AUDIO_FILE
+                delay(CHILD_BREATH_DELAY_TIME)
+                breathCount++
+            }
             var metronomeIndex = 0
             while (isActive) {
                 metronomeIndex++
@@ -169,6 +175,9 @@ class HostViewModel(
                     }
                 }
             }
+
+            newbornHelp.value = NewbornHelp.START_ZMS
+            newbornHelp.value = NewbornHelp.NONE
 
             var metronomeIndex = 0
             while (isActive) {
@@ -228,6 +237,7 @@ class HostViewModel(
         private const val MIDDLE_DELAY_TIME = 5000L
         private const val LONG_DELAY_TIME = 8000L
         private const val NEWBORN_BREATH_DELAY_TIME = 2000L
+        private const val CHILD_BREATH_DELAY_TIME = 2000L
         private const val MILLISECOND_IN_MINUTE = 60000.0
         private const val METRONOME_RATE = 100
     }
@@ -246,5 +256,5 @@ enum class AudioPlayerCompletion {
 }
 
 enum class NewbornHelp {
-    EVALUATE_RHYTHM, FIVE_BREATH, FIVE_BREATH_AND_START_ZMS, NONE
+    EVALUATE_RHYTHM, FIVE_BREATH, FIVE_BREATH_AND_START_ZMS, START_ZMS, NONE
 }

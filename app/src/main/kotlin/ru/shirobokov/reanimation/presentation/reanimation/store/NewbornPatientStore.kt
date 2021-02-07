@@ -9,6 +9,9 @@ import ru.shirobokov.reanimation.presentation.reanimation.model.ReanimationModel
 
 class NewbornPatientStore(interactor: ReanimationInteractor) : ReanimationStore(interactor) {
 
+    private var zmsStartedTimeOffset = 0
+
+    override val evaluateRhythmHelpRes = R.string.reanimation_help_evaluate_rhythm_newborn
     override val defibrillationHelpRes = R.string.reanimation_help_do_defibrillation_child
     override val adrenalinInjectHelpRes = R.string.reanimation_help_inject_adrenalin_child
     override val amiodaroneFirstInjectHelpInt = 0
@@ -28,6 +31,7 @@ class NewbornPatientStore(interactor: ReanimationInteractor) : ReanimationStore(
             NewbornHelp.FIVE_BREATH_AND_START_ZMS -> {
                 helpList.add(R.string.reanimation_help_five_breath_and_start_zms to System.currentTimeMillis())
             }
+            NewbornHelp.START_ZMS -> zmsStartedTimeOffset = reanimationModel.zmsTimer
             else -> Unit
         }
         return reanimationModel
@@ -47,8 +51,11 @@ class NewbornPatientStore(interactor: ReanimationInteractor) : ReanimationStore(
                 isInjectAdrenalin && adrenalinTimer in 150..180 -> R.drawable.bg_card_orange
                 else -> R.drawable.bg_card_red
             },
-            firstAudioFile = when (zmsTimer % 60) {
-                0 -> EVALUATION_RHYTHM_AUDIO_FILE
+            firstAudioFile = when ((zmsTimer - zmsStartedTimeOffset) % 60) {
+                0 -> {
+                    helpList.add(evaluateRhythmHelpRes to System.currentTimeMillis())
+                    EVALUATION_RHYTHM_AUDIO_FILE
+                }
                 else -> NONE_AUDIO_FILE
             },
             secondAudioFile = when (adrenalinTimer) {

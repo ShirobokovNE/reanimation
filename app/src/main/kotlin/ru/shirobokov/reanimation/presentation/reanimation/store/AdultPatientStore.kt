@@ -12,8 +12,11 @@ open class AdultPatientStore(
     startHelpRes: Int = R.string.reanimation_help_start_adult
 ) : ReanimationStore(reanimationInteractor) {
 
+    private var evaluateRhythmTime = 0L
+
     private val doIntubationHelp = R.string.reanimation_help_do_intubation
 
+    override val evaluateRhythmHelpRes = R.string.reanimation_help_evaluate_rhythm_asystolia
     override val defibrillationHelpRes = R.string.reanimation_help_do_defibrillation_adult
     override val adrenalinInjectHelpRes = R.string.reanimation_help_inject_adrenalin_adult
     override val amiodaroneFirstInjectHelpInt = R.string.reanimation_help_inject_300_amiodarone_adult
@@ -29,6 +32,14 @@ open class AdultPatientStore(
     override fun saveNewBornHelp(helpType: NewbornHelp, reanimationModel: ReanimationModel) = reanimationModel
 
     override fun newSecondProcess(reanimationModel: ReanimationModel) = with(reanimationModel) {
+        // если в течении минуты после оценки ритма не было дефибриляции, то добавляем запись "асистолия"
+        if (evaluateRhythmTime != 0L &&
+            ((!isDoDefibrillation && (zmsTimer + 1) % 60 == 0) ||
+                (isDoDefibrillation && (defibrillationTimer + 1) % 60 == 0))) {
+            helpList.add(evaluateRhythmHelpRes to evaluateRhythmTime)
+            evaluateRhythmTime = 0
+        }
+
         copy(
             zmsCardTimer = mapToViewTimer(zmsTimer++),
             adrenalinCardTimer = mapToViewTimer(adrenalinTimer++),
@@ -57,8 +68,12 @@ open class AdultPatientStore(
             },
             firstAudioFile = when {
                 defibrillationTimer == 90 -> ReanimationModel.PREPARE_DEFIBRILLATION_AUDIO_FILE
-                defibrillationTimer == 120 -> ReanimationModel.DO_DEFIBRILLATION_IF_NEED_AUDIO_FILE
+                defibrillationTimer == 120 -> {
+                    evaluateRhythmTime = System.currentTimeMillis()
+                    ReanimationModel.DO_DEFIBRILLATION_IF_NEED_AUDIO_FILE
+                }
                 (!isDoDefibrillation && zmsTimer % 120 == 0) || (isDoDefibrillation && defibrillationTimer % 120 == 0) -> {
+                    evaluateRhythmTime = System.currentTimeMillis()
                     ReanimationModel.EVALUATION_RHYTHM_AUDIO_FILE
                 }
                 else -> NONE_AUDIO_FILE
@@ -95,6 +110,7 @@ open class AdultPatientStore(
 
     override fun doDefibrillationClick(reanimationModel: ReanimationModel) = with(reanimationModel) {
         helpList.add(defibrillationHelpRes to System.currentTimeMillis())
+        evaluateRhythmTime = 0
         defibrillationTimer = 0
         copy(
             defibrillationCardTimer = mapToViewTimer(defibrillationTimer),
@@ -112,5 +128,10 @@ open class AdultPatientStore(
             previousZmsCardText = R.string.reanimation_ivl_text,
             doIntubationCardVisibility = false
         )
+    }
+
+    override suspend fun reanimationFinishClick(reanimationModel: ReanimationModel): ReanimationModel {
+        if (evaluateRhythmTime != 0L) helpList.add(evaluateRhythmHelpRes to evaluateRhythmTime)
+        return super.reanimationFinishClick(reanimationModel)
     }
 }

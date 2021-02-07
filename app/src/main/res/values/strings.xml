@@ -18,56 +18,77 @@
     <string name="reanimation_defibrillation_title">Дефиб.</string>
     <string name="reanimation_death_cause_title">Обратимые причины смерти:</string>
     <string name="reanimation_death_cause_description1">гипоксия,\nгиповолемия,\nгипотермия,
-        \nацидоз,\nгипо/гипер K+</string>
+        \nацидоз,\nгипо/гипер K+
+    </string>
     <string name="reanimation_death_cause_description2">пневмоторакс,\nтампонада сердца,
-        \nотравление,\nТЭЛА,\nОКС</string>
+        \nотравление,\nТЭЛА,\nОКС
+    </string>
     <string name="reanimation_additional_manipulation_title">Дополнительные процедуры:</string>
     <string name="reanimation_additional_manipulation_card1">высушить\nноворожденного,
-        \nподдержание температуры тела</string>
+        \nподдержание температуры тела
+    </string>
     <string name="reanimation_additional_manipulation_card2">мониторинг ЭКГ и SpO2,\nвенозный
-        доступ (пупочный катетер)</string>
+        доступ (пупочный катетер)
+    </string>
     <string name="reanimation_adrenalin_inject_title">Введение Адреналина</string>
-    <string name="reanimation_adrenalin_inject_description_adult">1 мг (1 мл) развести до 20
-        мл</string>
+    <string name="reanimation_adrenalin_inject_description_adult">1 мг (1 мл) развести до 20 мл</string>
     <string name="reanimation_adrenalin_inject_description_child">10 мкг/кг (0.01 мл/кг)</string>
     <string name="reanimation_do_defibrillation_title">Дефибрилляция %s</string>
     <string name="reanimation_do_defibrillation_count">Выполнено: %d</string>
     <string name="reanimation_finish_title">Завершить реанимацию</string>
     <string name="reanimation_do_defibrillation_360">150–360 Дж</string>
     <string name="reanimation_do_defibrillation_4">4 Дж/кг</string>
-    <string name="reanimation_do_intubation_card_title">Выполнена герметизация дыхательных
-        путей</string>
+    <string name="reanimation_do_intubation_card_title">Выполнена герметизация дыхательных путей</string>
 
     <!--  HelpListFragment  -->
     <string name="reanimation_help_start_adult">%s. Первичный осмотр, состояние расценено как
-        клиническая смерть, начат ЗМС 100 в минуту, ИВЛ мешком Амбу через тугую лицевую маску с
-        подключением линии подачи кислорода 2/30 с ЗМС; мониторинг.</string>
+        клиническая смерть, начат ЗМС 100 в минуту, ИВЛ мешком AMBU через тугую лицевую маску с
+        подключением линии подачи кислорода 2/30 с ЗМС; мониторинг.
+    </string>
     <string name="reanimation_help_start_child">%s. Первичный осмотр, состояние расценено как
-        клиническая смерть, начат ЗМС 100 в минуту, ИВЛ мешком Амбу через тугую лицевую маску с
-        подключением линии подачи кислорода 2/15 с ЗМС; мониторинг.</string>
+        клиническая смерть, выполнено 5 искусственных вдохов, начат ЗМС 100 в минуту, ИВЛ мешком
+        AMBU через тугую лицевую маску с подключением линии подачи кислорода 2/15 с ЗМС;
+        мониторинг.
+    </string>
     <string name="reanimation_help_evaluate_rhythm">%s. Оценка ритма сердца и дыхания.
-        Состояние расценено как клиническая смерть.</string>
+        Состояние расценено как клиническая смерть.
+    </string>
     <string name="reanimation_help_five_breath">%s. Выполнено 5 вдохов воздухом, оценка ритма сердца
-        и дыхания. Состояние расценено как клиническая смерть.</string>
+        и дыхания. Состояние расценено как клиническая смерть.
+    </string>
     <string name="reanimation_help_five_breath_and_start_zms">%s. Выполнено 5 вдохов воздухом,
         оценка ритма сердца и дыхания. Состояние расценено как клиническая смерть. Начат ЗМС с
-        частотой 100 в минуту, ИВЛ мешком AMBU через тугую лицевую маску в соотношении 1/3 с ЗМС.</string>
+        частотой 100 в минуту, ИВЛ мешком AMBU через тугую лицевую маску в соотношении 1/3 с ЗМС.
+    </string>
     <string name="reanimation_help_inject_adrenalin_adult">%s. Sol. Adrenalini 1.0 mg/ml в
-        разведении Sol. Natrii Chloridi 0.9%% до 20 ml внутривенно быстро.</string>
+        разведении Sol. Natrii Chloridi 0.9%% до 20 ml внутривенно быстро.
+    </string>
     <string name="reanimation_help_inject_adrenalin_child">%s. Sol. Adrenalini 10 мкг/кг в
-        разведении Sol. Natrii Chloridi 0.9%% внутривенно быстро.</string>
+        разведении Sol. Natrii Chloridi 0.9%% внутривенно быстро.
+    </string>
     <string name="reanimation_help_do_defibrillation_adult">%s. На экране монитора
         зафиксирована фибрилляция желудочков, выполнена дефибрилляция, продолжен ЗМС и ИВЛ в
-        прежнем режиме.</string>
+        прежнем режиме.
+    </string>
     <string name="reanimation_help_do_defibrillation_child">%s. На экране монитора зафиксирована
         фибрилляция желудочков, выполнена дифибрилляция 4 Дж/кг, продолжен ЗМС и ИВЛ в прежнем режиме.
     </string>
+    <string name="reanimation_help_evaluate_rhythm_asystolia">%s. Оценка ритма -
+        регистрируется асистолия, пульс на магистральных артериях отсутствует. Продолжен ЗМС и
+        ИВЛ в прежнем режиме.
+    </string>
+    <string name="reanimation_help_evaluate_rhythm_newborn">%s. Оценка ритма -
+        регистрируется__
+    </string>
     <string name="reanimation_help_inject_300_amiodarone_adult">%s. Sol. Amiodaroni 300 mg
-        внутривенно быстро.</string>
+        внутривенно быстро.
+    </string>
     <string name="reanimation_help_inject_150_amiodarone_adult">%s. Sol. Amiodaroni 150 mg
-        внутривенно быстро.</string>
+        внутривенно быстро.
+    </string>
     <string name="reanimation_help_inject_amiodarone_child">%s. Sol. Amiodaroni 5 мг/кг
-        внутривенно болюсно.</string>
+        внутривенно болюсно.
+    </string>
     <string name="reanimation_help_do_intubation">%s. Под контролем прямой ларингоскопии
         ларингоскопом с клинком McIntosh| Miller №___ выполнена оротрахеальная интубация трубкой №___.
         Конец трубки под визуальным контролем с первой попытки без технических сложностей заведен за
@@ -75,11 +96,13 @@
         трубки в трёх точках - шумы ИВЛ проводятся симметрично с двух сторон. Манжета раздута.
         Фиксация ЭТТ. Аускультативный контроль положения трубки в пяти точках - шумы ИВЛ
         проводятся симметрично с двух сторон Санация трахеи аспиратором. ИВЛ продолжена через ЭТТ
-        с частотой 10 в минуту. ЗМС продолжен непрерывно 100-120 в минуту.</string>
+        с частотой 10 в минуту. ЗМС продолжен непрерывно 100-120 в минуту.
+    </string>
     <string name="reanimation_help_finish">%s. Оценка ритма - на экране
         монитора регистрируется асистолия. Пульс на магистральных артериях отсутствует.
         Реанимационные мероприятия остановлены ввиду неэффективности реанимационных мероприятий,
-        направленных на восстановление жизненно важных функций в течение ___ минут.</string>
+        направленных на восстановление жизненно важных функций в течение ___ минут.
+    </string>
 
     <string name="reanimation_finish_copy">Скопировано</string>
 
@@ -89,9 +112,11 @@
 
     <!--  AboutFragment -->
     <string name="warning_text">Рекомендуем вам протестировать программу на вашем устройстве до
-        того, как она понадобится в реальной клинической ситуации.</string>
+        того, как она понадобится в реальной клинической ситуации.
+    </string>
     <string name="about_text">Приложение для помощи медицинским работникам в
-        оказании сердечно-легочной реанимации с звуковыми подсказками.</string>
+        оказании сердечно-легочной реанимации с звуковыми подсказками.
+    </string>
     <string name="video_instruction_text">Видеоинструкция</string>
     <string name="version_text">Версия: %s</string>
     <string name="new_and_interest_text">Новое и интересное</string>
